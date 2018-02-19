@@ -263,10 +263,10 @@ $episodeList = getLatestEpisodes($howMany);
 			<itunes:email>info@davidjeremiah.org</itunes:email>
 		</itunes:owner>
 		<itunes:explicit>No</itunes:explicit>
-		<itunes:image href="http://turning-point-radio-podcast.appspot.com/Turning-Point-Cover-1400x1400.png"/>
+		<itunes:image href="http://turning-point-radio-podcast.appspot.com/Turning-Point-Cover-1400x1400.png"></itunes:image>
 		<itunes:category text="News &amp; Politics">
-			<itunes:category text="Religion &amp; Spirituality"/>
-				 <itunes:category text="Christianity">
+			<itunes:category text="Religion &amp; Spirituality">
+				 <itunes:category text="Christianity"></itunes:category>
 			</itunes:category>
 		</itunes:category>
 <?
