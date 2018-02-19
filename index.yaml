@@ -1,0 +1,8 @@
+indexes:
+
+- kind: Episode
+  ancestor: no
+  properties:
+  - name: __key__
+    direction: desc
+  - name: datetime

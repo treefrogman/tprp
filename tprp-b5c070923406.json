@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "turning-point-radio-podcast",
+  "private_key_id": "b5c070923406ebab16e1497796c449ec5781fc93",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDrmp6avALgOa3P\n41dGm8eeP3Sy/bqML4dD5qxXfdJzzf/5d0OT/p5fiWveNfcWAomMDlrucn6R7dQK\n8Xop9RPyngPDDtYX1omgNaO8s9SHdPdNbpWiC+h4sPwAn9vy8qaGIMR/H/QXyiSL\n4njxJwAyN7y61sg/QoQXsUlznYTr5jLLwwnJqU+WoGGaeNLdwiP8mvYPQVX3+nft\nJ9yh9cSUBl/oOlKFzjEbG9XONg0o+C4uTnYhjrtloxoVz/SnecDenBLGsaOu2uu/\n/dIHQ1QGDnl+gAzOADQfjDD9maSGkHVPJYGIlqP5quA4fSv4PuoPtPFKFcCUPwBK\nUJ06AceBAgMBAAECggEAU/xgQYR3+fpVrV+7Qt5RQGYacZvlHgfrThcypFWj6cgr\nUYBkRKNlTWUtYJ8YH250HcsYOxvxZo/DIMuH4uEMZVZSvPvS8dh2Yvf8EE6Cmm7l\noWKkUImyKyPcEVTrESXSmsmfgjmfx8M1V/A5cK2Yck5QJsJdy78oW1HFf0NNmNFd\ndlvaOe+8PP4Tc/wnPpPMaDm9UZ9VRHi28rNv13fp98+7y5AZk4Vrq+BbtZ0gE+i9\n1oguJWDhnaJT1vQPG2KzS3+WcKuLn/RJrKR9fXGlwPIjfHroPKj7JfGVx6NOWlaa\nAlLs4l+ZyBkJRJMZyDqKI6R6zMPVI4dcTENcR8V5qQKBgQD6MWXV5CJAtBZn/2jI\nKFx1qIdph0Y4c/bYBR0Qla//klNSD9JFsxQbv6O1KDYKDRBLtSQfqbVJc87HDXYi\ne8Jlq6SEsMQgBWK5Wyg+RHYq3/fQBuhM48OadOaZpmdHaYVByfLmhIoVl4o9B56a\nYFqY1beWwMf5vCdGHRC80eNGwwKBgQDxEolg+t/FnKrjS2yqwKwm3aQchp1v1YUL\naRQ3CBbajZH3IFBTFvvtf/saB7bLXY6Ue4Kbku0dXYv8UbRgf7jcacp/HT90afri\nuCKLY8iLlrGaVqB8fAIWOgNI6XlDCZJrMtPOTok2Wa5PGo4RTggaGyAQSx8TLy5e\nSZGSvwS8awKBgCBL+CVgSbuog6vxIImWDDl0A+bve3UWIytHnbTiXdHUBcV2HWK5\n90KNvohIJJGvlgbv3zXnJmvQ80RmzHUvHK0bNyWZ2/d2OoRK7Cr9k3N9bfQAsEQc\nssdhh9MV1Ac36+fONfjj6x9WbJXsQeETxx4rmINxZ18plrhKUDrPrVMZAoGBALKL\nAgg7heP7pmz0/aRxUo7udI9T++JKB2FuD7S6XwK6+zJGUndXfHpn4PdkYzO3NNQv\nrYm/hbHMCNN1R9x4e9dy2rDOXqK/ozqrGZqW6n7Huv4Nzoqj5X/Es44arN7Dhhey\n6z/O1rzUKs8XYcTbQBDlqhenK3qv5O2cGx7OLpnFAoGBAK1nYFWckCvGyCtM9YjH\nHy91/6E6Dh/iljt6ZmWfezIRShvg8/X/oj8xUztGY4jTiiY+nEtK4PdSeEXS2jP/\nVbKEJc1fqWgSOY+2IeKdDAcVxfLW7wyDDZitY816ZeeoIXA7Hns1uhu6mrtLzc5N\nSsRqiBnUQNgTkBie2hIc2ySm\n-----END PRIVATE KEY-----\n",
+  "client_email": "localhost-dev@turning-point-radio-podcast.iam.gserviceaccount.com",
+  "client_id": "101878523678281478754",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/localhost-dev%40turning-point-radio-podcast.iam.gserviceaccount.com"
+}
