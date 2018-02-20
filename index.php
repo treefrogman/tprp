@@ -1,6 +1,10 @@
-<?='<?xml version="1.0" encoding="UTF-8"?>';?>
 <?
+header('Content-Type: application/rss+xml; charset=UTF-8');
+?><?='<?xml version="1.0" encoding="UTF-8"?>';?>
+<?
+
 //<pre style="font-family:Courier;white-space:pre-wrap;text-indent:5em hanging;">
+
 require_once 'vendor/autoload.php';
 
 $howMany = isset($_GET["limit"]) ? $_GET['limit'] : 24;
@@ -251,7 +255,7 @@ $episodeList = getLatestEpisodes($howMany);
 //</pre>
 ?>
 
-<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Turning Point Radio</title>
 		<description>Turning Point is the broadcast ministry of Dr. David Jeremiah</description>
@@ -261,7 +265,7 @@ $episodeList = getLatestEpisodes($howMany);
 		<lastBuildDate><?=$pubDate;?></lastBuildDate>
 		<pubDate><?=$pubDate;?></pubDate>
 		<docs>http://blogs.law.harvard.edu/tech/rss</docs>
-		<webMaster>treefrogman@gmail.com</webMaster>
+		<webMaster>treefrogman@gmail.com (Miles Cooley)</webMaster>
 		<itunes:author>Dr. David Jeremiah</itunes:author>
 		<itunes:subtitle>Turning Point is the broadcast ministry of Dr. David Jeremiah</itunes:subtitle>
 		<itunes:summary>Turning Point is the broadcast ministry of Dr. David Jeremiah</itunes:summary>
@@ -271,6 +275,7 @@ $episodeList = getLatestEpisodes($howMany);
 		</itunes:owner>
 		<itunes:explicit>No</itunes:explicit>
 		<itunes:image href="http://turning-point-radio-podcast.appspot.com/Turning-Point-Cover-1400x1400.png"></itunes:image>
+		<atom:link href="http://turning-point-radio-podcast.appspot.com" rel="self" type="application/rss+xml" />
 		<itunes:category text="News &amp; Politics">
 			<itunes:category text="Religion &amp; Spirituality">
 				 <itunes:category text="Christianity"></itunes:category>
