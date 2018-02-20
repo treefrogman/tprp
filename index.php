@@ -1,9 +1,11 @@
 <?='<?xml version="1.0" encoding="UTF-8"?>';?>
 <?
-
+//<pre style="font-family:Courier;white-space:pre-wrap;text-indent:5em hanging;">
 require_once 'vendor/autoload.php';
 
-$howMany = $_GET['limit'];
+$howMany = isset($_GET["limit"]) ? $_GET['limit'] : 24;
+$fetchAllOverride = isset($_GET["fetchAllOverride"]);
+$refetchMediaURLs = isset($_GET["refetchMediaURLs"]) ? $_GET['refetchMediaURLs'] : false;
 
 //include 'error_reporting.php';
 
@@ -45,28 +47,20 @@ function getMediaURL($bid) {
 	//http://stackoverflow.com/questions/5647461/how-do-i-send-a-post-request-with-php
 	$srcurl = 'http://www.davidjeremiah.org/site/radio_player.aspx?id=' . $bid;
 
-	//open connection
-	$ch = curl_init();
-
-	//set the url, number of POST vars, POST data
-	curl_setopt($ch, CURLOPT_URL, $srcurl);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
-
-	//execute post
-	$result = curl_exec($ch);
+	//fetch radio page
+	$result = file_get_contents($srcurl);
 
 	// get lines
 	$lines = explode("\n", $result);
-	
-	// get the 25th line
-	$line = $lines[24];
+	// get the 26th line
+	$line = $lines[25];
 	
 	// get the URL
-	$chopBeginning = substr($line, 49);
+	$chopBeginning = substr($line, 52);
 	$chopOnQuotes = explode('"', $chopBeginning);
-	
+
 	$url = $chopOnQuotes[0];
-	//echo "getMediaURL($bid)";
+
 	return $url;
 }
 function getMediaLength($url) {
@@ -88,7 +82,7 @@ function getMediaLength($url) {
 	$beginningChop = explode("Content-Length: ", $result);
 	$endChop = explode("\n", $beginningChop[1]);
 	$length = $endChop[0];
-	//echo "getMediaLength($url)";
+
 	return $length;
 }
 function getEpisodesFromDJ($lastMonth, $viewMore, $stopAtBid) {
@@ -138,7 +132,7 @@ function getLatestEpisodeFromDatastore() {
 	}
 }
 function getEpisodesFromDatastore($howMany = false) {
-	global $datastore;
+	global $datastore, $refetchMediaURLs;
 	$query = $datastore->query()
 		->kind('Episode')
 		->order('datetime', 'DESCENDING');
@@ -147,17 +141,27 @@ function getEpisodesFromDatastore($howMany = false) {
 	}
 	$result = $datastore->runQuery($query);
 	$episodeList = array();
-	foreach ($result as $item) {
+	foreach ($result as $key=>$item) {
 		$episode = (object)($item->get());
 		unset($episode->datetime);
+		if ($refetchMediaURLs && $key > $refetchMediaURLs ) {
+			$episode = refetchMediaURL($episode, $episode->bid);
+		}
 		array_push($episodeList, $episode);
 	}
 	return $episodeList;
 }
+function refetchMediaURL($episode, $bid) {
+	echo $bid."\r\n";
+	$url = getMediaURL($bid);
+	$episode->mediaURL = $url;
+	$episode->mediaLength = getMediaLength($url);
+	addEpisodeToDatastore($episode, $bid);
+	return $episode;
+}
 function addEpisodeToDatastore($episode, $bid) {
 	global $datastore;
 	$episodeArray = (array)$episode;
-	$transaction = $datastore->transaction();
 	$key = $datastore->key('Episode', $bid);
 	$entity = $datastore->entity($key, $episodeArray);
 	$entity["datetime"] = new DateTime($episode->date);
@@ -169,7 +173,7 @@ function addEpisodeToDatastore($episode, $bid) {
 		"mediaURL",
 		"mediaLength"
 	]);
-
+	$transaction = $datastore->transaction();
 	$transaction->upsert($entity);
 	$transaction->commit();
 }
@@ -215,6 +219,7 @@ function parseDateFromDJ($dateString) {
 
 // Main function
 function getLatestEpisodes($howMany = false) {
+	global $fetchAllOverride;
 	$latestEpisode = getLatestEpisodeFromDatastore();
 	if ($latestEpisode) {
 		$today = getTodayDate();
@@ -227,7 +232,9 @@ function getLatestEpisodes($howMany = false) {
 		$fetchAll = true;
 		$latestEpisodeBid = 0;
 	}
-	if ($fetchAll || (getDatePlusNDays($latestEpisodeDate, 4 + (!$saturday)) < $today)) {
+	if ($fetchAllOverride) {
+		getEpisodesFromDJ(false, true, 0);
+	} else if ($fetchAll || (getDatePlusNDays($latestEpisodeDate, 4 + (!$saturday)) < $today)) {
 	// If way out of date (missing more than five days—six if today is not Saturday)...
 		// getGrid() with showMore
 		getEpisodesFromDJ(false, true, $latestEpisodeBid);
@@ -241,7 +248,7 @@ function getLatestEpisodes($howMany = false) {
 
 $pubDate = formatDateForPodcast(getTodayDate());
 $episodeList = getLatestEpisodes($howMany);
-
+//</pre>
 ?>
 
 <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
